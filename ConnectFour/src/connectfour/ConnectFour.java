@@ -5,6 +5,8 @@
  */
 package connectfour;
 
+import java.util.Random;
+
 /**
  *
  * @author yeady
@@ -18,6 +20,8 @@ public class ConnectFour {
         //Calling createBoard Method
      gameBoard = createBoard('b');
        printBoard();
+      
+       
        
     }
     private static char[][] createBoard(char startingCha){
@@ -37,7 +41,44 @@ public class ConnectFour {
                 System.out.print(gameBoard[i][j]);
             }
             System.out.println();
-  }
+            }
     
-    }
+  }
+  
+   private static void takeTurn(char currentPlayer){
+   Random pick = new Random();
+   int row = 5;
+   int col = pick.nextInt(7);
+   
+   while(true){
+       //emply spot, place in gameBoard; break
+       if(gameBoard[row][col] == 'b'){
+           gameBoard[row][col] = currentPlayer;
+           break;
+       }
+       //checking if column is full
+       else if(row==0){
+           col = pick.nextInt(7);
+       }
+       //Go next row up
+       else{
+           row--;
+       }
+   }
+   
+   }
+   
+   private static char playGame(char [][] gameBoard){
+       int winner = 10;
+       while(winner>0){
+           if(winner%2 == 0){
+               takeTurn('y');
+           }
+           else{
+               takeTurn('r');
+           }
+         winner--;  
+       }
+   return 't';
+}
 }
